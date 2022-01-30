@@ -1,27 +1,27 @@
-﻿using System.Net;
+﻿using Newtonsoft.Json.Linq;
+using System.Net;
 
 namespace BookingClient.BL
 {
     public static class CommonUtils
     {
         
-        private const string USDCurrency = "USD";
-        private const string urlPattern = "http://rate-exchange-1.appspot.com/currency?from={0}&to={1}";
-        public static decimal CurrencyConversion(decimal amount, string fromCurrency)
+        private const string urljson = "https://freecurrencyapi.net/api/v2/latest?apikey=0dd09760-8020-11ec-8898-399a7c1c754a";
+        public static decimal CurrencyConversiontoUSD(decimal? amount, string fromCurrency)
         {
-                if (fromCurrency == USDCurrency)
-                    return amount;
+                if (amount == null)
+                    return 0;
 
-                string url = string.Format(urlPattern, fromCurrency, USDCurrency);
+                if (fromCurrency == "USD")
+                    return (decimal)amount;
 
-                using (var wc = new WebClient())
+                using (var webClient = new WebClient())
                 {
-                    var json = wc.DownloadString(url);
+                    var jsonString = webClient.DownloadString(urljson);
+                    JObject o = JObject.Parse(jsonString);
+                    decimal exchangeRate = (decimal)o.SelectToken(@"data."+ fromCurrency.ToUpper());
 
-                    Newtonsoft.Json.Linq.JToken token = Newtonsoft.Json.Linq.JObject.Parse(json);
-                    decimal exchangeRate = (decimal)token.SelectToken("rate");
-
-                    return (amount * exchangeRate);
+                    return (decimal)(amount / exchangeRate);
                 }
         }
 

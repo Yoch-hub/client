@@ -9,7 +9,6 @@ namespace BookingClient.BL
 {
     public  class BookingsBL
     {
-        //private BookingsBL(ILogger<BookingQualityCheck> logger) { }
         private static BookingsBL instance = null;
         public static BookingsBL Instance
         {
@@ -23,7 +22,6 @@ namespace BookingClient.BL
             }
         }
     
-       
         public List<BookingQualityCheck> GetQualityCheck()
         {
             List<Booking> bookings = getBookingsFromAPI();
@@ -38,24 +36,18 @@ namespace BookingClient.BL
             try
             {
                 string url = "http://localhost:9292/api/bookings";
-                //HttpClient client = new HttpClient();
-                //string response = await client.GetStringAsync(url);
-                //List<Booking> bookings = JsonConvert.DeserializeObject<List<Booking>>(response);
-                //return bookings;
 
                 using (WebClient webClient = new System.Net.WebClient())
                 {
-
                     var jsonString = webClient.DownloadString(url);
                     var root = JsonConvert.DeserializeObject<RootBookings>(jsonString);
-                    //JObject obj = JObject.Parse(jsonString);
-                    //var root = JsonConvert.DeserializeObject<RootBookings>(jsonString);
+
                     return root.bookings;
+
                 }
             }
             catch (Exception ex)
             {
-                //logger.LogError("error in getBookingsList = " + ex.ToString());
                 return null;
             }
 

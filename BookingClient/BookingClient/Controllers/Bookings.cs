@@ -2,17 +2,22 @@
 using BookingClient.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace BookingClient.Controllers
 {
     [Route("api/payments_with_quality_check")]
-    public class AlbumController : Controller
+    public class PaymentsController : Controller
     {
 
         [HttpGet(Name = "payments_with_quality_check")]
-        public List<BookingQualityCheck> Get()
+        public  string Get()
         {
-            return BookingsBL.Instance.GetQualityCheck();
+            List<BookingQualityCheck> list= BookingsBL.Instance.GetQualityCheck();
+
+            var customDataObj = new { bookings_with_quality_check = list };
+            string json = JsonConvert.SerializeObject(customDataObj);
+            return json;
         }
     }
 }
