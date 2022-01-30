@@ -1,6 +1,6 @@
-﻿using BookingClient.BL;
+﻿using Common;
 
-namespace BookingClient.Models
+namespace Models
 {
     public class BookingQualityCheck
     {
@@ -83,10 +83,6 @@ namespace BookingClient.Models
         {
             return booking.ConvertedAmountReceived < amountWithFees;
         }
-
-
-
-        
 
 
     }

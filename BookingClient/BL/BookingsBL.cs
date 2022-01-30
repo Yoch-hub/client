@@ -1,11 +1,9 @@
-﻿using BookingClient.Models;
-using Nancy.Json;
+﻿using Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net;
-using System.Web.Helpers;
 
-namespace BookingClient.BL
+namespace BL
 {
     public  class BookingsBL
     {

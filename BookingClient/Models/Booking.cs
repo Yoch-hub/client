@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json.Linq;
-using BookingClient.BL;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
+using Common;
 
-namespace BookingClient.Models
+namespace Models
 {
     public class Booking
     {

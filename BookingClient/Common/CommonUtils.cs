@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Net;
 
-namespace BookingClient.BL
+namespace Common
 {
     public static class CommonUtils
     {

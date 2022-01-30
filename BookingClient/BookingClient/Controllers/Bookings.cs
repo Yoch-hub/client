@@ -1,5 +1,5 @@
-﻿using BookingClient.BL;
-using BookingClient.Models;
+﻿using BL;
+using Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
