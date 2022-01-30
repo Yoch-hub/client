@@ -7,10 +7,8 @@ namespace Models
 {
     public class Booking
     {
-        public bool IsDuplicatStudentPayment { get; set; }
-
-        private bool isConvertToUSD;
-
+        private decimal convertedAmount;
+        private decimal convertedAmountReceived;
         [JsonProperty("Reference")]
         public string Reference { get; set; }
 
@@ -40,9 +38,35 @@ namespace Models
 
         [JsonProperty("email")]
         public string Email { get; set; }
+        public bool IsDuplicatStudentPayment { get; set; }
 
-        public decimal ConvertedAmount { get { return CommonUtils.CurrencyConversiontoUSD(amount, CurrencyFrom); } }
-        public decimal ConvertedAmountReceived { get { return CommonUtils.CurrencyConversiontoUSD(amountReceived, CurrencyFrom); } }
+        public decimal ConvertedAmount
+        { 
+            get 
+            { 
+                if (convertedAmount == 0) 
+                     convertedAmount = CommonUtils.CurrencyConversiontoUSD(amount, CurrencyFrom);
+
+                return convertedAmount;
+            } 
+        }
+        public decimal ConvertedAmountReceived {
+            get
+            {
+                if (convertedAmountReceived == 0)
+                    convertedAmountReceived = CommonUtils.CurrencyConversiontoUSD(amountReceived, CurrencyFrom);
+
+                return convertedAmountReceived;
+            }
+        }
+   
+    public bool IsValid()
+        {
+            if (StudentId == null)
+                return false ;
+
+            return true;
+        }
 
     }
 }

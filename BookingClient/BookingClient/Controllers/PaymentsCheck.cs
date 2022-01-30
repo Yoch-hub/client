@@ -7,9 +7,8 @@ using Newtonsoft.Json;
 namespace BookingClient.Controllers
 {
     [Route("api/payments_with_quality_check")]
-    public class PaymentsController : Controller
+    public class PaymentsCheckController : Controller
     {
-
         [HttpGet(Name = "payments_with_quality_check")]
         public  string Get()
         {

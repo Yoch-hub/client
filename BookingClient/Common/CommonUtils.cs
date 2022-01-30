@@ -21,7 +21,7 @@ namespace Common
                     JObject o = JObject.Parse(jsonString);
                     decimal exchangeRate = (decimal)o.SelectToken(@"data."+ fromCurrency.ToUpper());
 
-                    return (decimal)(amount / exchangeRate);
+                    return Math.Round((decimal)(amount / exchangeRate), 2);
                 }
         }
 

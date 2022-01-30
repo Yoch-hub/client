@@ -47,7 +47,7 @@ namespace Models
                     fees = booking.ConvertedAmount * (decimal)0.03; 
                     break;
             }
-            return booking.ConvertedAmount + fees;
+            return Math.Round(booking.ConvertedAmount + fees,2);
         }
 
         private List<string> getQualityCheck()
