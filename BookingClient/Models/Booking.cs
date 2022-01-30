@@ -65,6 +65,12 @@ namespace Models
             if (StudentId == null)
                 return false ;
 
+            if (amount == null)
+                return false;
+
+            if (amountReceived == null)
+                return false;
+
             return true;
         }
 

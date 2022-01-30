@@ -10,7 +10,10 @@ namespace Models
         public decimal amountReceived;
         public string qualityCheck
         {
-            get { return string.Join(",", qualityCheckList); }
+            get { 
+                if (qualityCheckList != null) return string.Join(",", qualityCheckList);
+                else return null;
+            }
         }
         public bool overPayment;
         public bool underPayment;
@@ -20,13 +23,16 @@ namespace Models
       
         public BookingQualityCheck(Booking booking)
         {
-            this.booking = booking;
-            reference = booking.Reference;
-            amount = booking.ConvertedAmount;
-            amountWithFees = getAmountWithFees();
-            qualityCheckList = getQualityCheck();
-            overPayment = getOverPayment();
-            underPayment = getUnderPayment();
+            if (booking.IsValid())
+            {
+                this.booking = booking;
+                reference = booking.Reference;
+                amount = booking.ConvertedAmount;
+                amountWithFees = getAmountWithFees();
+                qualityCheckList = getQualityCheck();
+                overPayment = getOverPayment();
+                underPayment = getUnderPayment();
+            }
         }
 
         private decimal getAmountWithFees()

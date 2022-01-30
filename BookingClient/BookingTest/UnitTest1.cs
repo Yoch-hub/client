@@ -12,6 +12,13 @@ namespace BookingTest
     {
 
         [TestMethod]
+        public void GetQualityCheck_ShouldReturnNotValidBooking()
+        {
+            List<Booking> bookings = GetTestBookings();
+            Assert.AreEqual(bookings[3].IsValid(), false);
+        }
+
+        [TestMethod]
         public void GetQualityCheck_ShouldReturnCorrectDuplicate()
         {
             List<Booking> bookings = GetTestBookings();
@@ -55,6 +62,7 @@ namespace BookingTest
             testBookings.Add(new Booking { Reference = "10000", StudentId = 1, amount = 1500, amountReceived = 1600, CountryFrom = "China", CurrencyFrom = "USD", Email = "tttttt.tt", School = "MIT", SenderAddress = "", SenderFullName = "Yochi Liberman" });
             testBookings.Add(new Booking { Reference = "50000", StudentId = 1000, amount = 40000, amountReceived = 1000000000, CountryFrom = "Spain", CurrencyFrom = "Eur", Email = "test@test.test", School = "MIT", SenderAddress = "", SenderFullName = "Ben Blass" });
             testBookings.Add(new Booking { Reference = "", StudentId = 1, amount = 1500, amountReceived = 1600, CountryFrom = "China", CurrencyFrom = "CAD", Email = "tttttt.tt", School = "MIT", SenderAddress = "", SenderFullName = "kuku" });
+            testBookings.Add(new Booking { Reference = "", StudentId = null, amount = null, amountReceived = 1600, CountryFrom = "China", CurrencyFrom = "USD", Email = "y@gmail.com", School = "MIT", SenderAddress = "", SenderFullName = "kuku" });
            
             return testBookings;
         }
